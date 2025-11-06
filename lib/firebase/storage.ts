@@ -15,6 +15,9 @@ export async function uploadFile(
   file: File,
   path: string
 ): Promise<string> {
+  if (!storage) {
+    throw new Error('Firebase Storage is not configured');
+  }
   const storageRef = ref(storage, path);
   const snapshot = await uploadBytes(storageRef, file);
   const downloadURL = await getDownloadURL(snapshot.ref);
@@ -28,6 +31,9 @@ export function uploadFileWithProgress(
   file: File,
   path: string
 ): UploadTask {
+  if (!storage) {
+    throw new Error('Firebase Storage is not configured');
+  }
   const storageRef = ref(storage, path);
   return uploadBytesResumable(storageRef, file);
 }
@@ -36,6 +42,9 @@ export function uploadFileWithProgress(
  * Get download URL for a file
  */
 export async function getFileURL(path: string): Promise<string> {
+  if (!storage) {
+    throw new Error('Firebase Storage is not configured');
+  }
   const storageRef = ref(storage, path);
   return await getDownloadURL(storageRef);
 }
@@ -44,6 +53,9 @@ export async function getFileURL(path: string): Promise<string> {
  * Delete a file from storage
  */
 export async function deleteFile(path: string): Promise<void> {
+  if (!storage) {
+    throw new Error('Firebase Storage is not configured');
+  }
   const storageRef = ref(storage, path);
   await deleteObject(storageRef);
 }

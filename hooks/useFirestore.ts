@@ -19,9 +19,12 @@ export function useDocument(collectionName: string, docId: string | null) {
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    if (!docId) {
+    if (!docId || !db) {
       setData(null);
       setLoading(false);
+      if (!db) {
+        setError(new Error('Firebase is not configured'));
+      }
       return;
     }
 
@@ -59,6 +62,13 @@ export function useCollection(collectionName: string, queryConstraints?: Query) 
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
+    if (!db) {
+      setData([]);
+      setLoading(false);
+      setError(new Error('Firebase is not configured'));
+      return;
+    }
+
     setLoading(true);
     const collectionRef = queryConstraints || collection(db, collectionName);
 

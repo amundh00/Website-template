@@ -23,6 +23,9 @@ import { db } from './config';
 export const firestoreOperations = {
   // Create a document
   async create(collectionName: string, data: DocumentData) {
+    if (!db) {
+      throw new Error('Firestore is not configured');
+    }
     const docRef = await addDoc(collection(db, collectionName), {
       ...data,
       createdAt: serverTimestamp(),
@@ -33,6 +36,9 @@ export const firestoreOperations = {
 
   // Read a single document
   async getOne(collectionName: string, docId: string) {
+    if (!db) {
+      throw new Error('Firestore is not configured');
+    }
     const docRef = doc(db, collectionName, docId);
     const docSnap = await getDoc(docRef);
     
@@ -47,6 +53,9 @@ export const firestoreOperations = {
     collectionName: string,
     constraints: QueryConstraint[] = []
   ) {
+    if (!db) {
+      throw new Error('Firestore is not configured');
+    }
     const q = query(collection(db, collectionName), ...constraints);
     const querySnapshot = await getDocs(q);
     
@@ -58,6 +67,9 @@ export const firestoreOperations = {
 
   // Update a document
   async update(collectionName: string, docId: string, data: DocumentData) {
+    if (!db) {
+      throw new Error('Firestore is not configured');
+    }
     const docRef = doc(db, collectionName, docId);
     await updateDoc(docRef, {
       ...data,
@@ -67,6 +79,9 @@ export const firestoreOperations = {
 
   // Delete a document
   async delete(collectionName: string, docId: string) {
+    if (!db) {
+      throw new Error('Firestore is not configured');
+    }
     const docRef = doc(db, collectionName, docId);
     await deleteDoc(docRef);
   },
