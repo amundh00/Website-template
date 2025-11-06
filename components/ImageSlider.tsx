@@ -78,8 +78,9 @@ export function ImageSlider() {
         />
       ))}
 
-      {/* White Overlay - makes black logos stand out */}
-      <div className="absolute inset-0 bg-white/60" />
+      {/* Subtle blue-white gradient overlay - premium look */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/80 via-white/60 to-blue-100/70" />
+      <div className="absolute inset-0 backdrop-blur-[3px]" />
 
       {/* Hero Text and Buttons */}
       <div className="absolute inset-0 flex flex-col items-center justify-center px-4">
