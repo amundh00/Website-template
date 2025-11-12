@@ -78,96 +78,77 @@ export function ImageSlider() {
         />
       ))}
 
-      {/* Subtle blue-white gradient overlay - premium look */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/80 via-white/60 to-blue-100/70" />
-      <div className="absolute inset-0 backdrop-blur-[1px]" />
+      {/* Luxury gradient overlay with depth */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-50/85 via-blue-50/75 to-indigo-100/80" />
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/10 via-transparent to-transparent" />
+      <div className="absolute inset-0 backdrop-blur-[0.5px]" />
 
       {/* Hero Text and Buttons */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center px-4">
-        <h1 className="text-6xl md:text-8xl lg:text-7xl font-bold text-gray-900 text-center mb-0 md:mb-6">
-          Velkommen til Engengruppen!
-        </h1>
-        <p className="text-1xl md:text-2xl lg:text-2xl font-light text-gray-900 text-center mb-12 md:mb-16">
-          Velg din destinasjon hos oss!
-        </p>
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-6 md:px-8 py-8">
+        {/* Title Section - premium typography */}
+        <div className="mb-10 md:mb-14 text-center space-y-3 md:space-y-4">
+          <div className="inline-block">
+            <p className="text-xs md:text-sm font-light tracking-[0.3em] text-slate-600 uppercase mb-3 md:mb-4">
+              Velkommen til
+            </p>
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-none">
+              <span className="bg-gradient-to-br from-slate-900 via-slate-700 to-slate-900 bg-clip-text text-transparent drop-shadow-sm">
+                Engengruppen
+              </span>
+            </h1>
+            <div className="h-[2px] w-32 md:w-48 mx-auto mt-4 md:mt-6 bg-gradient-to-r from-transparent via-slate-400 to-transparent"></div>
+          </div>
+          <p className="text-sm md:text-base lg:text-lg font-light text-slate-700 tracking-[0.2em] uppercase">
+            Velg din destinasjon
+          </p>
+        </div>
         
-        {/* Place Buttons */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 max-w-4xl w-full">
-          {places.map((place) => (
+        {/* Place Buttons - luxury frosted glass cards */}
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-5 md:gap-7 lg:gap-9 max-w-5xl w-full">
+          {places.map((place, index) => (
             <a
               key={place.name}
               href={place.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="relative transition-all duration-300 hover:scale-110 overflow-hidden aspect-square flex items-center justify-center w-28 h-28 md:w-32 md:h-32 mx-auto"
+              className="group relative transition-all duration-500 ease-out flex items-center justify-center"
+              style={{
+                animation: `fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.12}s both`
+              }}
             >
-              <Image
-                src={place.image}
-                alt={place.name}
-                fill
-                className="object-contain"
-              />
+              {/* Subtle glow effect on hover */}
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-300/0 to-indigo-300/0 group-hover:from-blue-300/8 group-hover:to-indigo-300/8 blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
+              
+              {/* Premium glass container */}
+              <div className="relative w-28 h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 bg-white/25 backdrop-blur-2xl rounded-3xl shadow-[0_8px_32px_0_rgba(31,38,135,0.15)] group-hover:shadow-[0_12px_40px_0_rgba(31,38,135,0.2)] group-hover:bg-white/30 group-hover:scale-[1.02] group-hover:-translate-y-0.5 transition-all duration-500 p-4 flex items-center justify-center border border-white/50 group-hover:border-white/60">
+                {/* Inner glow */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/20 to-transparent opacity-50 group-hover:opacity-60 transition-opacity duration-500"></div>
+                
+                <Image
+                  src={place.image}
+                  alt={place.name}
+                  fill
+                  className="object-contain p-3 transition-all duration-500 group-hover:scale-105 filter drop-shadow-lg"
+                />
+              </div>
             </a>
           ))}
         </div>
       </div>
-
-      {/* Navigation Arrows */}
-      <button
-        onClick={goToPrevious}
-        className="absolute left-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/80 hover:bg-white text-gray-800 rounded-full backdrop-blur-md transition-all duration-500 ease-out hover:scale-110 hover:shadow-xl flex items-center justify-center group"
-        aria-label="Previous image"
-      >
-        <svg
-          className="w-6 h-6 transition-transform duration-500 group-hover:-translate-x-0.5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          strokeWidth={2.5}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M15 19l-7-7 7-7"
-          />
-        </svg>
-      </button>
-
-      <button
-        onClick={goToNext}
-        className="absolute right-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/80 hover:bg-white text-gray-800 rounded-full backdrop-blur-md transition-all duration-500 ease-out hover:scale-110 hover:shadow-xl flex items-center justify-center group"
-        aria-label="Next image"
-      >
-        <svg
-          className="w-6 h-6 transition-transform duration-500 group-hover:translate-x-0.5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          strokeWidth={2.5}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M9 5l7 7-7 7"
-          />
-        </svg>
-      </button>
-
-      {/* Dots Navigation */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-2.5 bg-white/80 backdrop-blur-md px-4 py-3 rounded-full shadow-lg">
-        {images.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            className={`rounded-full transition-all duration-500 ease-out ${
-              index === currentIndex
-                ? 'bg-gray-800 w-10 h-2.5'
-                : 'bg-gray-400/60 hover:bg-gray-600 w-2.5 h-2.5 hover:scale-125'
-            }`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
-      </div>
+      
+      {/* CSS Animation */}
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(40px) scale(0.95);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+      `}</style>
     </div>
   );
 }
